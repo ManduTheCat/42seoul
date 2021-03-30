@@ -6,45 +6,35 @@
 /*   By: myoukim <myoukim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 20:40:08 by myoukim           #+#    #+#             */
-/*   Updated: 2021/03/30 01:45:25 by myoukim          ###   ########.fr       */
+/*   Updated: 2021/03/31 01:42:35 by myoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
-void	ft_print_comb(void);
-void	add (int arr);
-void	evaluate (int arr);
-
-void	ft_putchar(int arr)
+int		ft_print_comb (void)
 {
-	while (arr[0] < 3)
+	char arr[3];
+
+	arr[0] = '0';
+	while (arr[0] <= '7')
 	{
-	   	write(1, arr, 1);
-	   	arr[0]++;
+		arr[1] = arr[0] + 1;
+		while (arr[1] <= '8')
+		{
+			arr[2] = arr[1] + 1;
+			while (arr[2] <= '9')
+			{
+				write(1, &arr, 3);
+				if  (arr[0] != '7' || arr[1] != '8' || arr[2] != '9' )
+				{
+					write(1, ",", 1);
+					write(1, " ", 1);
+				}
+				arr[2]+=1;
+			}
+			arr[1]+=1;
+		}
+		arr[0]+=1;
 	}
 }
-int		main (void)
-{
-	int		arr[3];
-	int		*buff;
-	int 	index;
-
-	index = 0;	
-	arr[0] = 0;
-	arr[1] = 1;
-	arr[2] = 2;
-	buff = arr;
-	ft_putchar(buff);
-	while (arr[0] < 3)
-	{
-	   	write(1, arr, 1);
-	   	arr[0]++;
-	}
-	
-	//evaluate (buff);
-
-	
-}
-
