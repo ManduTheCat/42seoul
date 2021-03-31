@@ -1,80 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb2.c                                   :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myoukim <myoukim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: myoukim <myoukim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/30 23:27:50 by myoukim           #+#    #+#             */
-/*   Updated: 2021/03/31 02:30:28 by myoukim          ###   ########.fr       */
+/*   Created: 2021/03/31 13:49:10 by myoukim           #+#    #+#             */
+/*   Updated: 2021/03/31 17:05:41 by myoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	print_rl(char l_0, char l_1, char r_0, char r_1, char space);
+void	ft_put_char(char a)
+{
+	write(1, &a, 1);
+}
+
+void	ft_put_all(char num)
+{
+	ft_put_char(num / 10 + '0');
+	ft_put_char(num % 10 + '0');
+}
+
+void	ft_print(int num1, int num2)
+{
+	ft_put_all(num1);
+	write(1, " ", 1);
+	ft_put_all(num2);
+	write(1, ",", 1);
+	write(1, " ", 1);
+}
+
+void	arg(char *num1, int *index)
+{
+	*num1 = 0;
+	*index = 0;
+}
 
 int		main(void)
 {
-	char	l_0;
-	char	l_1;
-	char	r_1;
-	char	r_0;
-	char 	space;
+	char	num1;
+	char	num2;
+	int		index;
+	int		in_index;
 
-	l_0 = '0';
-	l_1 = '0';
-	r_0 = '0';
-	r_1 = '1';
-	space = ' ';
-	while(l_0 <= '9') //종료 조건 넣고  함수화 필요
+	arg(&num1, &index);
+	while (index < 99)
 	{
-		if (l_1 + l_0 < r_1 + r_0)
+		num2 = 1;
+		in_index = 0;
+		index += 1;
+		while (in_index < 99)
 		{
-			print_rl(l_0, l_1, r_0, r_1, space);
-		}
-		else
-		{
-			l_0 += 1;
-		}
-		while(l_1 <= '9')
-		{
-			if (l_1 + l_0 < r_1 + r_0)
-			{
-				print_rl(l_0, l_1, r_0, r_1, space);
-			}
+			if (num1 >= num2)
+				in_index += 1;
 			else
 			{
-				l_1 += 1;
+				ft_print(num1, num2);
+				in_index += 1;
 			}
-
-			while (r_0 <= '9')
-			{
-				print_rl(l_0, l_1, r_0, r_1, space);
-				while (r_1 < '9')
-				{
-					r_1+= 1;
-					print_rl(l_0, l_1, r_0, r_1, space);
-				}
-				r_1 = '0';
-				r_0 += 1;
-			}
-			r_0 = '0';
-			l_1 += 1;
+			num2 += 1;
 		}
-		l_1 = '0';
-		l_0 += 1;
+		num1 += 1;
 	}
-
-}
-
-void	print_rl(char l_0, char l_1, char r_0, char r_1, char space)
-{
-	write(1, &l_0, 1);
-	write(1, &l_1, 1);
-	write(1, &space, 1);
-	write(1, &r_0, 1);
-	write(1, &r_1, 1);
-	write(1, ",", 1);
-	write(1, &space, 1);
 }
